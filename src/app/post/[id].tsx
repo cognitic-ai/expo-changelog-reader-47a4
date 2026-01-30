@@ -185,12 +185,12 @@ export default function PostDetailScreen() {
       </ScrollView>
 
       <Stack.Toolbar>
-        <Stack.ToolbarButton
+        <Stack.Toolbar.Button
           title="Open in Safari"
           icon="safari"
           onPress={handleOpenInBrowser}
         />
-        <Stack.ToolbarButton
+        <Stack.Toolbar.Button
           title="Share"
           icon="square.and.arrow.up"
           onPress={handleShare}
