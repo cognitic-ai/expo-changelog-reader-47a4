@@ -1,9 +1,21 @@
 {
   "expo": {
+    "name": "Expo Blog",
+    "slug": "expo-blog",
+    "version": "1.0.0",
     "orientation": "default",
-    "scheme": "acme",
+    "scheme": "expoblog",
     "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "bundleIdentifier": "com.expoblog.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["remote-notification"]
+      }
+    },
     "android": {
+      "package": "com.expoblog.app",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
