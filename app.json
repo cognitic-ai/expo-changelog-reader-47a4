@@ -15,7 +15,8 @@
       "expo-image",
       "expo-router",
       "expo-web-browser",
-      "@bacons/apple-colors"
+      "@bacons/apple-colors",
+      "@bacons/apple-targets"
     ]
   }
 }
