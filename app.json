@@ -2,6 +2,7 @@
   "expo": {
     "name": "Expo Blog",
     "slug": "expo-blog",
+    "owner": "bacon",
     "version": "1.0.0",
     "orientation": "default",
     "scheme": "expoblog",
@@ -11,7 +12,8 @@
       "bundleIdentifier": "com.expoblog.app",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["remote-notification"]
+        "UIBackgroundModes": ["remote-notification"],
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -23,12 +25,18 @@
       "reactCompiler": true
     },
     "plugins": [
+      "expo-dev-client",
       "expo-font",
       "expo-image",
       "expo-router",
       "expo-web-browser",
       "@bacons/apple-colors",
       "@bacons/apple-targets"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b8e6b863-1e51-42d7-955f-481fdc9e61d7"
+      }
+    }
   }
 }
