@@ -5,6 +5,7 @@ interface PostsContextType {
   posts: BlogPost[];
   loading: boolean;
   refreshing: boolean;
+  error: string | null;
   refresh: () => void;
 }
 
@@ -14,13 +15,17 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const loadFeed = async (isRefresh = false) => {
     try {
+      setError(null);
       const feed = await fetchRSSFeed();
       setPosts(feed.posts);
     } catch (error) {
       console.error("Failed to load feed:", error);
+      const errorMessage = error instanceof Error ? error.message : "Failed to load posts";
+      setError(errorMessage);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -37,7 +42,7 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <PostsContext.Provider value={{ posts, loading, refreshing, refresh }}>
+    <PostsContext.Provider value={{ posts, loading, refreshing, error, refresh }}>
       {children}
     </PostsContext.Provider>
   );

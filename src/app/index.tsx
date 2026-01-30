@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 export default function BlogListScreen() {
-  const { posts, loading, refreshing, refresh } = usePosts();
+  const { posts, loading, refreshing, error, refresh } = usePosts();
 
   const search = useSearch({
     placeholder: "Search posts...",
@@ -37,6 +37,20 @@ export default function BlogListScreen() {
         }}
       >
         <ActivityIndicator size="large" color={AC.systemBlue} />
+        {error && (
+          <Text
+            style={{
+              fontSize: 15,
+              color: AC.systemRed,
+              marginTop: 16,
+              textAlign: "center",
+              paddingHorizontal: 32,
+            }}
+            selectable
+          >
+            {error}
+          </Text>
+        )}
       </View>
     );
   }
@@ -55,8 +69,20 @@ export default function BlogListScreen() {
         ListEmptyComponent={
           <View style={{ padding: 32, alignItems: "center" }}>
             <Text style={{ fontSize: 17, color: AC.secondaryLabel }}>
-              No posts found
+              {error ? error : "No posts found"}
             </Text>
+            {error && (
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: AC.tertiaryLabel,
+                  marginTop: 8,
+                  textAlign: "center",
+                }}
+              >
+                Pull to refresh to try again
+              </Text>
+            )}
           </View>
         }
         refreshControl={

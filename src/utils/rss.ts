@@ -20,7 +20,16 @@ const RSS_URL = "https://expo.dev/changelog/rss.xml";
 
 export async function fetchRSSFeed(): Promise<RSSFeed> {
   try {
-    const response = await fetch(RSS_URL);
+    const url = process.env.EXPO_OS === "web"
+      ? `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`
+      : RSS_URL;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const xmlText = await response.text();
 
     const parser = new XMLParser({
@@ -58,6 +67,9 @@ export async function fetchRSSFeed(): Promise<RSSFeed> {
     };
   } catch (error) {
     console.error("Failed to fetch RSS feed:", error);
+    if (error instanceof Error) {
+      console.error("Error details:", error.message);
+    }
     throw error;
   }
 }
